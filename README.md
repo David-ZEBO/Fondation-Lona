@@ -7,6 +7,10 @@ Signature : *« Ensemble, semons l'excellence. »*
 - **Sources :** `fondation-lona/`
 - **Prérequis :** WordPress 6.6 ou plus et PHP 8.1 ou plus (PHP 8.2+ recommandé). Le thème a été testé sur WordPress 7.1 et PHP 8.2 dans WordPress Playground.
 
+
+> **Démo en ligne** (téléphone, tablette, ordinateur) : https://david-zebo.github.io/Fondation-Lona/
+> Elle est publiée automatiquement par GitHub Pages à chaque `git push` sur la branche `main`. C'est une démonstration : chaque visite repart d'un site neuf.
+
 ---
 
 ## 1. Installation
