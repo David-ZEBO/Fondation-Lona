@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fondation LONA — site de démonstration</title>
+<style>
+	html, body { margin: 0; height: 100%; background: #0c1e3b; font-family: -apple-system, "Segoe UI", system-ui, sans-serif; }
+	iframe { border: 0; width: 100%; height: 100%; display: block; }
+	#loader { position: fixed; inset: 0; display: grid; place-items: center; background: #0c1e3b; color: #fff; z-index: 10; transition: opacity .4s; }
+	#loader .box { text-align: center; max-width: 420px; padding: 24px; }
+	#loader h1 { font-size: 22px; margin: 0 0 6px; }
+	#loader p { color: #e3c77f; margin: 0 0 18px; font-size: 15px; }
+	#bar { height: 6px; background: rgba(255,255,255,.15); border-radius: 6px; overflow: hidden; }
+	#bar span { display: block; height: 100%; width: 5%; background: #c9a348; transition: width .4s; }
+	#step { color: rgba(255,255,255,.7); font-size: 13px; margin-top: 12px; }
+	#err { color: #ffb4b4; font-size: 13px; margin-top: 12px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<div id="loader"><div class="box">
+	<h1>Fondation LONA</h1>
+	<p>Ensemble, semons l'excellence.</p>
+	<div id="bar"><span></span></div>
+	<div id="step">Démarrage de WordPress… (30 à 60 secondes)</div>
+	<div id="err"></div>
+</div></div>
+<iframe id="wp" title="Site Fondation LONA"></iframe>
+<script type="module">
+// Démo locale : WordPress tourne dans le navigateur (WordPress Playground).
+// Le thème est lu directement depuis le dossier ../fondation-lona.
+const step = (text, pct) => { document.getElementById('step').textContent = text; document.querySelector('#bar span').style.width = pct + '%'; };
+try {
+	const { startPlaygroundWeb } = await import('https://playground.wordpress.net/client/index.js');
+	const blueprint = { preferredVersions: { php: '8.2', wp: 'latest' }, login: true, steps: [ { step: 'setSiteLanguage', language: 'fr_FR' } ] };
+	const client = await startPlaygroundWeb({ iframe: document.getElementById('wp'), remoteUrl: 'https://playground.wordpress.net/remote.html', blueprint });
+	window.client = client;
+	step('Installation du thème Fondation LONA…', 45);
+	const files = await (await fetch('manifest.json?' + Date.now())).json();
+	const base = '/wordpress/wp-content/themes/fondation-lona/';
+	let n = 0;
+	for (const f of files) {
+		await client.mkdir((base + f).split('/').slice(0, -1).join('/'));
+		await client.writeFile(base + f, new Uint8Array(await (await fetch('../fondation-lona/' + f + '?' + Date.now())).arrayBuffer()));
+		if (++n % 20 === 0) step('Installation du thème… (' + n + '/' + files.length + ' fichiers)', 45 + Math.round(25 * n / files.length));
+	}
+	step('Activation du thème…', 72);
+	await client.run({ code: `<?php require '/wordpress/wp-load.php'; switch_theme('fondation-lona'); update_option('blogname','Fondation LONA'); update_option('blogdescription', "Ensemble, semons l'excellence."); wp_delete_post(1, true); wp_delete_post(2, true);` });
+	step('Création des pages, programmes, réalisations et articles…', 85);
+	await client.run({ code: `<?php require '/wordpress/wp-load.php'; wp_set_current_user(1); lona_run_starter(true, true);` });
+	step('Ouverture du site…', 100);
+	await client.goTo('/');
+	setTimeout(() => { const l = document.getElementById('loader'); l.style.opacity = 0; setTimeout(() => l.remove(), 400); }, 800);
+} catch (e) {
+	document.getElementById('err').textContent = 'Erreur : ' + (e && e.message ? e.message : e);
+}
+</script>
+</body>
+</html>

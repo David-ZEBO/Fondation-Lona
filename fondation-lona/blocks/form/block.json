@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/form",
+	"title": "Formulaire",
+	"category": "lona",
+	"icon": "feedback",
+	"description": "Formulaire sécurisé (contact, partenariat, bénévolat, newsletter).",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"type": {
+			"type": "string",
+			"default": "contact",
+			"enum": [
+				"contact",
+				"partner",
+				"volunteer",
+				"newsletter"
+			]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

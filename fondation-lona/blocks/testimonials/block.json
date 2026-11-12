@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/testimonials",
+	"title": "Témoignages",
+	"category": "lona",
+	"icon": "format-quote",
+	"description": "Témoignages autorisés de bénéficiaires et partenaires.",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"count": {
+			"type": "number",
+			"default": 3
+		},
+		"domain": {
+			"type": "string",
+			"default": "",
+			"enum": [
+				"",
+				"education",
+				"sante",
+				"vbg",
+				"autonomisation",
+				"inclusion"
+			]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

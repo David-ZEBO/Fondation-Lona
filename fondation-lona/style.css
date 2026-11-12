@@ -1,0 +1,16 @@
+/*
+Theme Name: Fondation LONA
+Theme URI: https://www.linkedin.com/company/fondationlona/
+Author: Fondation LONA
+Description: Thème institutionnel sur mesure (Full Site Editing) de la Fondation LONA — « Ensemble, semons l'excellence. » Programmes, réalisations, événements, partenaires, témoignages, formulaires sécurisés, SEO et multilingue (TranslatePress).
+Version: 1.0.0
+Requires at least: 6.6
+Tested up to: 7.1
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: fondation-lona
+Tags: full-site-editing, block-patterns, custom-colors, editor-style, translation-ready, accessibility-ready
+*/
+
+/* Les styles globaux sont définis dans theme.json et assets/css/main.css. */

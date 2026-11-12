@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/programs",
+	"title": "Programmes",
+	"category": "lona",
+	"icon": "awards",
+	"description": "Programmes de la Fondation (mise en page éditoriale).",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"count": {
+			"type": "number",
+			"default": 4
+		},
+		"domain": {
+			"type": "string",
+			"default": "",
+			"enum": [
+				"",
+				"education",
+				"sante",
+				"vbg",
+				"autonomisation",
+				"inclusion"
+			]
+		},
+		"layout": {
+			"type": "string",
+			"default": "feature",
+			"enum": [
+				"feature",
+				"list"
+			]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

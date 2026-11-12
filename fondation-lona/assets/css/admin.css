@@ -1,0 +1,12 @@
+/* Fondation LONA — administration */
+.lona-fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem 1.5rem; padding: 0.5rem 0; }
+.lona-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.lona-field--textarea, .lona-field--gallery, .lona-field--posts, .lona-field--checkbox { grid-column: 1 / -1; }
+.lona-field .description { margin: 0; }
+.lona-gallery-preview { display: flex; flex-wrap: wrap; gap: 6px; margin: 0.25rem 0 0.5rem; padding: 0; list-style: none; }
+.lona-gallery-preview img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; display: block; }
+.lona-settings__intro { font-size: 14px; max-width: 760px; }
+.lona-settings__card { background: #fff; border: 1px solid #dcdcde; border-top: 3px solid #c9a348; border-radius: 8px; padding: 0.5rem 1.5rem 1rem; margin: 1.25rem 0; max-width: 980px; }
+.lona-settings__card h2 { color: #142e55; }
+.lona-image-preview img { max-width: 240px; height: auto; background: #142e55; padding: 10px; border-radius: 6px; display: block; margin-bottom: 0.5rem; }
+.lona-log { list-style: disc; padding-left: 1.5rem; }

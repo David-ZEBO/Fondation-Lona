@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/site-header",
+	"title": "En-tête et méga-menu LONA",
+	"category": "lona",
+	"icon": "menu",
+	"description": "Barre utilitaire, logo, méga-menu et menu mobile. Le contenu se gère dans Apparence › Menus.",
+	"textdomain": "fondation-lona",
+	"attributes": {},
+	"supports": { "html": false, "multiple": false },
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

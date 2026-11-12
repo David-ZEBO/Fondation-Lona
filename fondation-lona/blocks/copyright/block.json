@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/copyright",
+	"title": "Copyright",
+	"category": "lona",
+	"icon": "editor-code",
+	"description": "Mention de copyright avec l'année en cours.",
+	"textdomain": "fondation-lona",
+	"attributes": {},
+	"supports": { "html": false },
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

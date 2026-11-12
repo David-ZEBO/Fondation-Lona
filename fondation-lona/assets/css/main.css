@@ -1,0 +1,1037 @@
+/* ==========================================================================
+   Fondation LONA — feuille de style principale
+   Les couleurs, typographies et espacements proviennent de theme.json
+   (variables --wp--preset--*). Ce fichier définit les composants.
+   Langage graphique : formes inclinées (parallélogrammes or/bleu) derrière
+   les photographies, arche et étoiles du logo, beaucoup de blanc.
+   ========================================================================== */
+
+:root {
+	--lona-navy: var(--wp--preset--color--primary, #142e55);
+	--lona-blue: var(--wp--preset--color--secondary, #23408c);
+	--lona-deep: var(--wp--preset--color--deep, #0c1e3b);
+	--lona-gold: var(--wp--preset--color--gold, #c9a348);
+	--lona-gold-light: var(--wp--preset--color--gold-light, #e3c77f);
+	--lona-gold-dark: var(--wp--preset--color--gold-dark, #8a6a1f);
+	--lona-light: var(--wp--preset--color--light, #f4f6f9);
+	--lona-text: var(--wp--preset--color--body-text, #263449);
+	--lona-muted: #5b6577;
+	--lona-line: #e3e7ee;
+	--lona-radius: 18px;
+	--lona-radius-sm: 10px;
+	--lona-shadow: 0 22px 50px -24px rgba(12, 30, 59, 0.35);
+	--lona-ease: cubic-bezier(0.22, 1, 0.36, 1);
+	--lona-skew: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+	--lona-header-h: 84px;
+	--lona-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.5c.6 5.6 4.9 9.9 10.5 10.5-5.6.6-9.9 4.9-10.5 10.5C11.4 16.9 7.1 12.6 1.5 12 7.1 11.4 11.4 7.1 12 1.5Z' fill='%23C9A348'/%3E%3C/svg%3E");
+}
+
+/* ---------- Base ---------- */
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--lona-header-h) + 16px); }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+img { height: auto; max-width: 100%; }
+::selection { background: var(--lona-gold-light); color: var(--lona-deep); }
+:where(a, button, input, select, textarea, summary):focus-visible {
+	outline: 3px solid var(--lona-gold);
+	outline-offset: 3px;
+	border-radius: 4px;
+}
+.screen-reader-text {
+	border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%);
+	height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute !important; width: 1px; word-wrap: normal !important;
+}
+.skip-link.screen-reader-text:focus { background: #fff; clip: auto; clip-path: none; height: auto; width: auto; padding: 1rem; z-index: 100000; }
+.site-main { margin-block-start: 0; }
+.site-main > * { margin-block-start: 0; }
+.wp-site-blocks > * + * { margin-block-start: 0; }
+
+/* ---------- Typographie : styles de blocs ---------- */
+.is-style-editorial { font-family: var(--wp--preset--font-family--editorial) !important; font-weight: 600 !important; letter-spacing: -0.01em !important; }
+.is-style-editorial em { color: var(--lona-gold-dark); }
+.is-style-eyebrow {
+	display: inline-flex; align-items: center; gap: 0.6rem;
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: 0.78rem !important; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+	color: var(--lona-gold-dark); margin-bottom: 0.75rem !important;
+}
+.is-style-eyebrow::before { content: ""; width: 14px; height: 14px; background: var(--lona-star) center / contain no-repeat; flex: none; }
+.has-text-align-center.is-style-eyebrow { display: flex; justify-content: center; }
+.has-primary-background-color .is-style-eyebrow,
+.has-deep-background-color .is-style-eyebrow,
+.wp-block-cover .is-style-eyebrow { color: var(--lona-gold-light); }
+.is-style-lead { font-size: var(--wp--preset--font-size--large) !important; line-height: 1.55; color: var(--lona-navy); }
+.wp-block-cover .is-style-lead { color: rgba(255, 255, 255, 0.92); }
+
+.is-style-stars { list-style: none; padding-left: 0; }
+.is-style-stars li { position: relative; padding-left: 1.9rem; margin-bottom: 0.65rem; }
+.is-style-stars li::before { content: ""; position: absolute; left: 0; top: 0.42em; width: 15px; height: 15px; background: var(--lona-star) center / contain no-repeat; }
+
+.wp-block-separator.is-style-gold-short { width: 64px; border: 0; border-top: 3px solid var(--lona-gold); opacity: 1; margin-left: 0; }
+.has-text-align-center + .wp-block-separator.is-style-gold-short { margin-inline: auto; }
+
+/* Contenu provisoire : visible et clairement identifié */
+.lona-provisional {
+	border: 1.5px dashed var(--lona-gold); background: #fffaf0; color: var(--lona-gold-dark);
+	padding: 0.9rem 1.1rem; border-radius: var(--lona-radius-sm); font-size: var(--wp--preset--font-size--small);
+}
+.lona-provisional::before { content: "⚑ "; }
+.lona-editor-notice {
+	border-left: 4px solid var(--lona-gold); background: #fffaf0; color: #5a4512;
+	padding: 0.85rem 1rem; font-size: 0.875rem; border-radius: 0 8px 8px 0;
+}
+.lona-empty { color: var(--lona-muted); font-style: italic; }
+
+/* ---------- Boutons ---------- */
+.wp-block-button__link { transition: background-color 0.25s var(--lona-ease), color 0.25s, transform 0.25s var(--lona-ease), box-shadow 0.25s; }
+.wp-block-button__link:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px rgba(12, 30, 59, 0.55); }
+.wp-block-button.is-style-gold .wp-block-button__link { background: var(--lona-gold); color: var(--lona-deep); }
+.wp-block-button.is-style-gold .wp-block-button__link:hover,
+.wp-block-button.is-style-gold .wp-block-button__link:focus { background: var(--lona-gold-light); color: var(--lona-deep); }
+.wp-block-button.is-style-outline-light .wp-block-button__link { background: transparent; color: #fff; border: 2px solid rgba(255, 255, 255, 0.7); }
+.wp-block-button.is-style-outline-light .wp-block-button__link:hover { background: #fff; color: var(--lona-navy); border-color: #fff; }
+.wp-block-button.is-style-outline .wp-block-button__link { background: transparent; color: var(--lona-navy); border: 2px solid currentColor; }
+.wp-block-button.is-style-outline .wp-block-button__link:hover { background: var(--lona-navy); color: #fff; }
+.wp-block-button.is-style-link-arrow .wp-block-button__link,
+.lona-link-arrow {
+	display: inline-flex; align-items: center; gap: 0.5rem; background: none; color: var(--lona-navy);
+	padding: 0.35rem 0; border-radius: 0; box-shadow: none; font-weight: 800; text-decoration: none;
+	border-bottom: 2px solid var(--lona-gold);
+}
+.wp-block-button.is-style-link-arrow .wp-block-button__link::after { content: "→"; transition: transform 0.25s var(--lona-ease); }
+.wp-block-button.is-style-link-arrow .wp-block-button__link:hover { transform: none; box-shadow: none; color: var(--lona-blue); background: none; }
+.wp-block-button.is-style-link-arrow .wp-block-button__link:hover::after,
+.lona-link-arrow:hover .lona-icon { transform: translateX(4px); }
+.lona-link-arrow .lona-icon { transition: transform 0.25s var(--lona-ease); width: 18px; height: 18px; }
+.has-primary-background-color .wp-block-button.is-style-link-arrow .wp-block-button__link { color: #fff; }
+
+/* ---------- Sections ---------- */
+.lona-section { padding-block: var(--wp--preset--spacing--70); position: relative; }
+.lona-section + .lona-section:not(.has-background) { padding-top: 0; }
+.has-background + .lona-section:not(.has-background),
+.wp-block-cover + .lona-section:not(.has-background) { padding-top: var(--wp--preset--spacing--70); }
+.lona-section__head { margin-bottom: var(--wp--preset--spacing--50) !important; gap: 1.5rem; }
+.lona-section__head h2 { margin: 0; max-width: 18ch; }
+.lona-section__intro { margin-bottom: var(--wp--preset--spacing--60) !important; }
+.lona-section__intro h2 { margin-top: 0; }
+
+/* Les sections dynamiques vides ne s'affichent pas aux visiteurs */
+.lona-section--testimonials:not(:has(.lona-testimonials, .lona-editor-notice)),
+.lona-section--partners:not(:has(.lona-partners, .lona-editor-notice)),
+.lona-section--projects:not(:has(.lona-projects, .lona-editor-notice)),
+.lona-section--programs:not(:has(.lona-programs, .lona-editor-notice)),
+.lona-section--impact:not(:has(.lona-stats, .lona-editor-notice)),
+.lona-related:not(:has(.lona-news__card)),
+.lona-section:has(> .lona-testimonials):not(:has(.lona-testimonial, .lona-editor-notice)) { display: none; }
+.lona-section--gallery:not(:has(img, iframe)) { display: none; }
+.lona-single .lona-section:empty, .wp-block-gallery:empty { display: none; }
+
+/* ---------- En-tête ---------- */
+.site-header {
+	position: sticky; top: var(--wp-admin--admin-bar--height, 0px); z-index: 50;
+	background: rgba(255, 255, 255, 0.96); backdrop-filter: saturate(1.6) blur(14px);
+	border-bottom: 1px solid transparent; transition: background-color 0.35s, box-shadow 0.35s, border-color 0.35s;
+}
+.site-header.is-scrolled { box-shadow: 0 10px 30px -22px rgba(12, 30, 59, 0.45); border-bottom-color: var(--lona-line); }
+.site-header__inner {
+	max-width: 1320px; margin-inline: auto; min-height: var(--lona-header-h);
+	padding-inline: clamp(1rem, 3vw, 2rem); gap: 1.25rem;
+}
+.site-brand { gap: 0.75rem; flex-shrink: 0; }
+.site-brand .wp-block-site-logo img { max-height: 58px; width: auto; transition: filter 0.3s; }
+.site-brand .wp-block-site-logo a { display: inline-grid; }
+.site-brand .wp-block-site-logo a > img { grid-area: 1 / 1; }
+.site-brand:has(.wp-block-site-logo img) .wp-block-site-title {
+	position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.wp-block-site-title a { text-decoration: none; color: var(--lona-navy); }
+.lona-logo-light { opacity: 0; pointer-events: none; }
+
+.site-nav { flex: 1; justify-content: center; }
+.site-nav .wp-block-navigation__container { gap: clamp(0.5rem, 1.6vw, 1.75rem); }
+.site-nav .wp-block-navigation-item__content { color: var(--lona-navy); text-decoration: none; padding-block: 0.5rem; position: relative; }
+.site-nav .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content::after {
+	content: ""; position: absolute; left: 0; right: 0; bottom: 0.1rem; height: 2px;
+	background: var(--lona-gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s var(--lona-ease);
+}
+.site-nav .wp-block-navigation-item:hover > .wp-block-navigation-item__content::after,
+.site-nav .current-menu-item > .wp-block-navigation-item__content::after { transform: scaleX(1); }
+.site-nav .wp-block-navigation__submenu-container {
+	border: 1px solid var(--lona-line) !important; border-radius: 14px; padding: 0.5rem !important;
+	box-shadow: var(--lona-shadow); min-width: 250px !important; background: #fff !important;
+}
+.site-nav .wp-block-navigation__submenu-container .wp-block-navigation-item__content { padding: 0.6rem 0.85rem !important; border-radius: 8px; font-weight: 600; }
+.site-nav .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover { background: var(--lona-light); color: var(--lona-blue); }
+.site-actions { gap: 0.9rem; flex-shrink: 0; }
+.site-actions .wp-block-button__link { padding: 0.75rem 1.35rem; font-size: 0.9rem; }
+
+/* En-tête transparent sur le Hero de l'accueil */
+.site-header.is-overlay:not(.is-scrolled) { background: transparent; backdrop-filter: none; }
+.site-header.is-overlay { position: fixed; left: 0; right: 0; }
+.site-header.is-overlay:not(.is-scrolled) .site-nav .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content,
+.site-header.is-overlay:not(.is-scrolled) .wp-block-site-title a,
+.site-header.is-overlay:not(.is-scrolled) .wp-block-navigation__responsive-container-open,
+.site-header.is-overlay:not(.is-scrolled) .lona-lang a,
+.site-header.is-overlay:not(.is-scrolled) .lona-lang { color: #fff; }
+/* Logo : version claire dédiée si fournie, sinon pastille blanche discrète */
+.site-header.is-overlay:not(.is-scrolled) .wp-block-site-logo:not(:has(.lona-logo-light)) a {
+	background: #fff; border-radius: 14px; padding: 6px 12px; box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.5);
+}
+.has-lona-light-logo .site-header.is-overlay:not(.is-scrolled) .wp-block-site-logo img:not(.lona-logo-light) { opacity: 0; }
+.has-lona-light-logo .site-header.is-overlay:not(.is-scrolled) .lona-logo-light { opacity: 1; }
+
+/* Menu mobile (bloc Navigation natif, accessible) */
+.wp-block-navigation__responsive-container.is-menu-open { padding: 1.5rem clamp(1.25rem, 5vw, 2.5rem) 2.5rem !important; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content { padding-top: 3.5rem; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container { gap: 0.25rem !important; width: 100%; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item { width: 100%; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content {
+	font-family: var(--wp--preset--font-family--heading); font-size: 1.35rem; font-weight: 800; padding: 0.55rem 0 !important; color: var(--lona-navy) !important;
+}
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container { border: 0 !important; box-shadow: none; padding: 0 0 0.75rem 0.75rem !important; border-left: 2px solid var(--lona-gold) !important; border-radius: 0; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content { font-size: 1rem; padding: 0.4rem 0.5rem !important; }
+.wp-block-navigation__responsive-container-open svg, .wp-block-navigation__responsive-container-close svg { width: 30px; height: 30px; }
+
+@media (max-width: 1100px) {
+	.site-actions .lona-lang { display: none; }
+}
+@media (max-width: 600px) {
+	:root { --lona-header-h: 70px; }
+	.site-brand .wp-block-site-logo img { max-height: 44px; }
+	.site-actions__cta .wp-block-button__link { padding: 0.6rem 1rem; font-size: 0.82rem; }
+	.site-header__inner { gap: 0.6rem; }
+}
+@media (max-width: 380px) { .site-actions__cta { display: none; } }
+
+/* Sélecteur de langue (TranslatePress / Polylang) */
+.lona-lang { font-family: var(--wp--preset--font-family--heading); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.lona-lang a { color: var(--lona-navy); text-decoration: none; }
+.lona-lang ul { display: flex; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+.lona-lang .trp-language-switcher { width: auto !important; }
+.lona-lang .trp-ls-shortcode-current-language, .lona-lang .trp-ls-shortcode-language { background: transparent !important; border: 0 !important; }
+.lona-lang .trp-ls-shortcode-language { background: #fff !important; border-radius: 10px; box-shadow: var(--lona-shadow); }
+
+/* ---------- Hero ---------- */
+.lona-hero { padding-top: calc(var(--lona-header-h) + 3rem) !important; padding-bottom: 5rem !important; overflow: hidden; }
+.lona-hero::after {
+	/* rappel des étoiles du logo, discret */
+	content: ""; position: absolute; right: 7%; bottom: 14%; width: clamp(70px, 9vw, 130px); aspect-ratio: 1;
+	background: var(--lona-star) center / contain no-repeat; opacity: 0.85; z-index: 1; pointer-events: none;
+	animation: lona-float 7s ease-in-out infinite;
+}
+.lona-hero__content {
+	max-width: 720px; position: relative; padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+}
+.lona-hero__content::before {
+	/* panneau incliné (langage graphique « formes ») */
+	content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--lona-gold); transform: skewX(-8deg);
+}
+.lona-hero__title { color: #fff !important; font-size: var(--wp--preset--font-size--display) !important; line-height: 1.04 !important; margin-block: 0.25rem 1.25rem; }
+.lona-hero__title em { font-family: var(--wp--preset--font-family--editorial); font-style: italic; font-weight: 600; color: var(--lona-gold-light); }
+.lona-hero__lead { font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: rgba(255, 255, 255, 0.9); max-width: 58ch; }
+.lona-hero__actions { margin-top: 2rem; gap: 0.85rem; }
+.lona-hero .wp-block-cover__image-background { animation: lona-zoom 26s ease-out both; }
+
+/* ---------- Bandeaux de pages internes ---------- */
+.lona-page-hero {
+	background: var(--lona-navy); color: #fff; padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4.5rem); position: relative; overflow: hidden;
+}
+.lona-page-hero::before {
+	content: ""; position: absolute; right: -6%; top: -30%; width: 46%; height: 160%;
+	background: var(--lona-blue); transform: skewX(-14deg); opacity: 0.55;
+}
+.lona-page-hero::after {
+	content: ""; position: absolute; right: 9%; top: 22%; width: 74px; height: 74px; background: var(--lona-star) center / contain no-repeat; opacity: 0.9;
+}
+.lona-page-hero > * { position: relative; z-index: 1; }
+.lona-page-hero__title, .lona-page-hero h1 { color: #fff !important; font-size: clamp(2.2rem, 5vw, 3.6rem) !important; max-width: 22ch; margin-top: 0.5rem; }
+.lona-page-hero__lead { color: rgba(255, 255, 255, 0.85); font-size: var(--wp--preset--font-size--large); max-width: 60ch; }
+.lona-page-hero__lead p { margin: 0; }
+.lona-page-hero .wp-block-post-excerpt__more-text { display: none; }
+
+.lona-single-hero { background-color: var(--lona-navy); padding-top: calc(var(--lona-header-h) + 2rem) !important; }
+.lona-single-hero__title { color: #fff !important; font-size: clamp(2.2rem, 5.2vw, 3.8rem) !important; max-width: 20ch; }
+.lona-single-hero__lead { color: rgba(255, 255, 255, 0.88); max-width: 60ch; font-size: var(--wp--preset--font-size--large); }
+
+/* Fil d'Ariane */
+.lona-breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; list-style: none; padding: 0; margin: 0 0 0.75rem; font-size: 0.85rem; }
+.lona-breadcrumbs li:not(:last-child)::after { content: "/"; margin-left: 0.5rem; opacity: 0.5; }
+.lona-breadcrumbs a { color: inherit; opacity: 0.8; text-decoration: none; }
+.lona-breadcrumbs a:hover { opacity: 1; text-decoration: underline; }
+.lona-page-hero .lona-breadcrumbs, .wp-block-cover .lona-breadcrumbs { color: rgba(255, 255, 255, 0.85); }
+.lona-article__head .lona-breadcrumbs { color: var(--lona-muted); }
+
+/* ---------- Contenu ---------- */
+.lona-content { padding-block: var(--wp--preset--spacing--60); }
+.lona-content > .alignfull:last-child { margin-bottom: calc(-1 * var(--wp--preset--spacing--60)); }
+.lona-content > h2 { margin-top: var(--wp--preset--spacing--60); }
+.lona-content > .lona-section.alignfull { margin-block: var(--wp--preset--spacing--60); }
+
+/* Image : cadre incliné doré (inspiration « formes » géométriques) */
+.wp-block-image.is-style-framed { position: relative; isolation: isolate; padding: 0 0 1.5rem 1.5rem; }
+.wp-block-image.is-style-framed::before {
+	content: ""; position: absolute; inset: 1.5rem 1.5rem 0 0; background: var(--lona-gold);
+	clip-path: polygon(8% 0, 100% 6%, 92% 100%, 0 94%); z-index: -1;
+}
+.wp-block-image.is-style-framed::after {
+	content: ""; position: absolute; right: -0.5rem; top: -1rem; width: 38%; height: 26%; background: var(--lona-navy);
+	clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); z-index: -1;
+}
+.wp-block-image.is-style-framed img { clip-path: polygon(0 3%, 100% 0, 97% 100%, 3% 97%); width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; }
+/* Image : arche (rappel du logo) */
+.wp-block-image.is-style-arch img { border-radius: 999px 999px var(--lona-radius) var(--lona-radius); aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+.wp-block-image.is-style-arch { position: relative; }
+.wp-block-image.is-style-arch::after {
+	content: ""; position: absolute; right: 6%; top: 8%; width: 54px; height: 54px; background: var(--lona-star) center / contain no-repeat;
+}
+
+/* Cartes */
+.is-style-card { background: #fff; border: 1px solid var(--lona-line); border-radius: var(--lona-radius); padding: clamp(1.5rem, 3vw, 2.25rem) !important; box-shadow: 0 1px 0 rgba(12, 30, 59, 0.03); }
+.has-light-background-color .is-style-card { border-color: transparent; }
+.is-style-gold-rule { border-top: 3px solid var(--lona-gold); padding-top: 1.25rem; }
+
+/* Mise en page « texte + image » */
+.lona-split { gap: clamp(2rem, 6vw, 6rem) !important; }
+.lona-split h2 { margin-top: 0; }
+.lona-about__pillars { margin-block: 1.75rem; }
+
+/* ---------- Actualités ---------- */
+.lona-news__list { display: grid !important; gap: clamp(1.25rem, 2.5vw, 2rem); grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
+.lona-section--news .lona-news__list { grid-template-columns: 1.35fr 1fr 1fr; grid-template-rows: auto auto; }
+.lona-section--news .lona-news__list > li:first-child { grid-row: span 2; }
+.lona-section--news .lona-news__list > li:first-child .lona-news__card { height: 100%; }
+.lona-section--news .lona-news__list > li:first-child .wp-block-post-featured-image img { aspect-ratio: 4 / 3.6 !important; }
+.lona-section--news .lona-news__list > li:first-child .lona-news__title { font-size: var(--wp--preset--font-size--x-large) !important; }
+.lona-section--news .lona-news__list > li:nth-child(n + 2) .lona-news__card { display: grid; grid-template-columns: 42% 1fr; gap: 1.1rem; align-items: start; }
+.lona-section--news .lona-news__list > li:nth-child(n + 2) .lona-news__excerpt { display: none; }
+.lona-section--news .lona-news__list > li:nth-child(4) { grid-column: 2 / 4; }
+.lona-news__card { margin: 0; }
+.lona-news__card .wp-block-post-featured-image { margin: 0 0 1.1rem; overflow: hidden; border-radius: var(--lona-radius); background: var(--lona-light); }
+.lona-news__card .wp-block-post-featured-image img { transition: transform 0.7s var(--lona-ease); width: 100%; object-fit: cover; }
+.lona-news__card:hover .wp-block-post-featured-image img { transform: scale(1.04); }
+.lona-news__card .wp-block-post-featured-image:not(:has(img)) { aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--lona-blue), var(--lona-deep)); }
+.lona-news__body > * { margin-block: 0 0.6rem; }
+.lona-news__meta { gap: 0.4rem 0.85rem; font-size: 0.8rem; color: var(--lona-muted); margin-bottom: 0.55rem !important; }
+.lona-news__meta .wp-block-post-terms a {
+	display: inline-block; text-decoration: none; color: var(--lona-navy); background: var(--lona-gold-light);
+	padding: 0.2rem 0.65rem; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+	clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+}
+.lona-news__title { font-size: var(--wp--preset--font-size--large) !important; line-height: 1.3 !important; }
+.lona-news__title a { text-decoration: none; color: var(--lona-navy); background: linear-gradient(var(--lona-gold), var(--lona-gold)) 0 100% / 0 2px no-repeat; transition: background-size 0.4s var(--lona-ease); }
+.lona-news__card:hover .lona-news__title a { background-size: 100% 2px; }
+.lona-news__excerpt { color: var(--lona-muted); }
+.lona-news__excerpt .wp-block-post-excerpt__more-text { display: none; }
+.lona-news__more { font-weight: 800; color: var(--lona-navy); text-decoration: none; border-bottom: 2px solid var(--lona-gold); }
+.lona-news--archive .lona-news__list > li { display: flex; }
+@media (max-width: 960px) {
+	.lona-news__list, .lona-section--news .lona-news__list { grid-template-columns: 1fr 1fr; }
+	.lona-section--news .lona-news__list > li:first-child { grid-column: 1 / -1; grid-row: auto; }
+	.lona-section--news .lona-news__list > li:nth-child(4) { grid-column: auto; }
+	.lona-section--news .lona-news__list > li:nth-child(n + 2) .lona-news__card { display: block; }
+}
+@media (max-width: 640px) {
+	.lona-news__list, .lona-section--news .lona-news__list { grid-template-columns: 1fr; }
+	.lona-section--news .lona-news__list > li:nth-child(n + 2) .lona-news__card { display: grid; grid-template-columns: 38% 1fr; gap: 0.9rem; }
+	.lona-section--news .lona-news__list > li:nth-child(n + 2) .wp-block-post-featured-image { margin: 0; }
+}
+
+.lona-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0 0 2.5rem; }
+.lona-filter li a { display: inline-block; padding: 0.45rem 1rem; border: 1px solid var(--lona-line); border-radius: 999px; text-decoration: none; color: var(--lona-navy); font-weight: 600; font-size: 0.9rem; }
+.lona-filter li a:hover, .lona-filter .current-cat a { background: var(--lona-navy); color: #fff; border-color: var(--lona-navy); }
+.wp-block-query-pagination { margin-top: 3rem; gap: 0.5rem; }
+.wp-block-query-pagination a, .wp-block-query-pagination .current { padding: 0.45rem 0.85rem; border-radius: 8px; text-decoration: none; }
+.wp-block-query-pagination .current { background: var(--lona-navy); color: #fff; }
+
+/* ---------- Domaines (composition éditoriale, non uniforme) ---------- */
+.lona-domains { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: minmax(150px, auto); }
+.lona-domains > * { margin: 0 !important; }
+.lona-domain { position: relative; overflow: hidden; border-radius: var(--lona-radius); background: var(--lona-navy); color: #fff; isolation: isolate; min-height: 300px; display: flex; flex-direction: column; justify-content: flex-end; }
+.lona-domain__image { position: absolute !important; inset: 0; margin: 0 !important; z-index: -2; }
+.lona-domain__image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--lona-ease); }
+.lona-domain::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(12, 30, 59, 0) 25%, rgba(12, 30, 59, 0.9) 100%); }
+.lona-domain:hover .lona-domain__image img { transform: scale(1.05); }
+.lona-domain__body { padding: clamp(1.25rem, 2.5vw, 2rem); position: relative; }
+.lona-domain__index { position: absolute; top: -2.6rem; left: clamp(1.25rem, 2.5vw, 2rem); margin: 0; font-family: var(--wp--preset--font-family--heading); font-weight: 800; font-size: 0.8rem; color: var(--lona-deep); background: var(--lona-gold); padding: 0.3rem 0.85rem; clip-path: var(--lona-skew); }
+.lona-domain__title { margin: 0 0 0.5rem !important; font-size: var(--wp--preset--font-size--large) !important; }
+.lona-domain__title a { color: #fff; text-decoration: none; }
+.lona-domain__title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.lona-domain__text { margin: 0; color: rgba(255, 255, 255, 0.86); font-size: 0.95rem; max-width: 46ch; }
+.lona-domain--education { grid-column: span 7; grid-row: span 2; }
+.lona-domain--education .lona-domain__title { font-size: var(--wp--preset--font-size--x-large) !important; }
+.lona-domain--sante { grid-column: span 5; }
+.lona-domain--vbg { grid-column: span 5; }
+.lona-domain--autonomisation { grid-column: span 6; }
+.lona-domain--inclusion { grid-column: span 6; }
+/* Variante éditoriale : le dernier duo en carte claire avec forme inclinée */
+.lona-domain--autonomisation, .lona-domain--inclusion { min-height: 260px; }
+@media (max-width: 900px) {
+	.lona-domains { grid-template-columns: 1fr 1fr; }
+	.lona-domain--education { grid-column: 1 / -1; grid-row: auto; min-height: 380px; }
+	.lona-domain--sante, .lona-domain--vbg, .lona-domain--autonomisation, .lona-domain--inclusion { grid-column: span 1; }
+}
+@media (max-width: 600px) {
+	.lona-domains { grid-template-columns: 1fr; }
+	.lona-domain, .lona-domain--education { grid-column: 1 / -1; min-height: 280px; }
+}
+
+/* ---------- Programmes ---------- */
+.lona-programs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.lona-program { display: flex; flex-direction: column; }
+.lona-program__media { display: block; position: relative; isolation: isolate; margin-bottom: 1.25rem; }
+.lona-program__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--lona-radius-sm); clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%); transition: transform 0.6s var(--lona-ease); }
+.lona-program:hover .lona-program__media img { transform: translateY(-4px); }
+.lona-program__index { font-family: var(--wp--preset--font-family--heading); font-weight: 800; font-size: 0.85rem; color: var(--lona-gold-dark); margin: 0 0 0.35rem; letter-spacing: 0.1em; }
+.lona-program__title { margin: 0.25rem 0 0.6rem; font-size: var(--wp--preset--font-size--large); }
+.lona-program__title a { color: var(--lona-navy); text-decoration: none; }
+.lona-program__text { color: var(--lona-muted); margin: 0 0 1rem; }
+.lona-program .lona-link-arrow { margin-top: auto; align-self: flex-start; }
+.lona-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lona-blue); }
+.lona-badge { background: var(--lona-light); color: var(--lona-navy); padding: 0.15rem 0.6rem; border-radius: 999px; letter-spacing: 0.04em; }
+/* Le premier programme est mis en avant : grande image + forme inclinée */
+.lona-programs--feature .lona-program:first-child { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(1.5rem, 5vw, 4.5rem); align-items: center; margin-bottom: 1.5rem; }
+.lona-programs--feature .lona-program:first-child .lona-program__media { margin: 0 0 0 1.5rem; }
+.lona-programs--feature .lona-program:first-child .lona-program__media::before {
+	content: ""; position: absolute; inset: 8% -4% -6% -1.5rem; z-index: -1; background: var(--lona-gold);
+	clip-path: polygon(6% 0, 100% 5%, 94% 100%, 0 92%);
+}
+.lona-programs--feature .lona-program:first-child .lona-program__media img { aspect-ratio: 16 / 11; clip-path: polygon(0 0, 100% 4%, 97% 100%, 3% 96%); border-radius: 0; }
+.lona-programs--feature .lona-program:first-child .lona-program__title { font-size: var(--wp--preset--font-size--xx-large); }
+.lona-programs--feature .lona-program:first-child .lona-program__index { font-size: 3rem; line-height: 1; color: var(--lona-gold); }
+.lona-programs--list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 900px) {
+	.lona-programs { grid-template-columns: 1fr 1fr; }
+	.lona-programs--feature .lona-program:first-child { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) { .lona-programs, .lona-programs--list { grid-template-columns: 1fr; } }
+
+/* ---------- Bâtir ensemble ---------- */
+.lona-build { overflow: hidden; }
+.lona-build::before {
+	content: ""; position: absolute; left: -5%; bottom: -10%; width: 38%; height: 55%; z-index: 1;
+	background: var(--lona-gold); opacity: 0.9; clip-path: polygon(0 20%, 100% 0, 80% 100%, 0 100%); mix-blend-mode: multiply;
+}
+.lona-build .wp-block-cover__inner-container { z-index: 2; }
+.lona-build__title { color: #fff !important; font-size: clamp(2.2rem, 5vw, 3.8rem) !important; }
+
+/* ---------- Réalisations (modules photographiques asymétriques, grille alignée) ---------- */
+.lona-projects { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: clamp(200px, 22vw, 290px); gap: clamp(0.75rem, 1.5vw, 1.25rem); }
+.lona-project { margin: 0; grid-column: span 4; position: relative; overflow: hidden; border-radius: var(--lona-radius); background: var(--lona-navy); }
+.lona-project:nth-child(5n + 1) { grid-column: span 7; grid-row: span 2; }
+.lona-project:nth-child(5n + 2) { grid-column: span 5; }
+.lona-project:nth-child(5n + 3) { grid-column: span 5; }
+.lona-project:nth-child(5n + 4) { grid-column: span 5; }
+.lona-project:nth-child(5n + 5) { grid-column: span 7; }
+.lona-projects--n1 .lona-project { grid-column: 1 / -1; }
+.lona-projects--n2 .lona-project:nth-child(2) { grid-row: span 2; grid-column: span 5; }
+.lona-projects--n3 .lona-project:nth-child(3) { grid-column: span 5; }
+.lona-projects--n4 .lona-project:nth-child(4) { grid-column: span 12; }
+.lona-project__link { display: block; height: 100%; color: #fff; text-decoration: none; }
+.lona-project img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--lona-ease); }
+.lona-project__link::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(12, 30, 59, 0) 30%, rgba(12, 30, 59, 0.92) 100%); }
+.lona-project:hover img { transform: scale(1.05); }
+.lona-project__overlay { position: absolute; inset: auto 0 0 0; z-index: 2; padding: clamp(1rem, 2.5vw, 1.75rem); }
+.lona-project__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.8rem; margin: 0 0 0.5rem; color: var(--lona-gold-light); font-weight: 600; }
+.lona-project__meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.lona-project__meta .lona-icon { width: 15px; height: 15px; }
+.lona-project__title { color: #fff; margin: 0; font-size: var(--wp--preset--font-size--large); }
+.lona-project:nth-child(5n + 1) .lona-project__title { font-size: var(--wp--preset--font-size--x-large); }
+.lona-project__text { margin: 0.5rem 0 0; font-size: 0.92rem; color: rgba(255, 255, 255, 0.85); max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s var(--lona-ease), opacity 0.4s; }
+.lona-project:hover .lona-project__text, .lona-project:focus-within .lona-project__text, .lona-project:nth-child(5n + 1) .lona-project__text { max-height: 8rem; opacity: 1; }
+.lona-project__result { display: inline-flex; gap: 0.4rem; align-items: center; margin: 0.75rem 0 0; font-weight: 700; font-size: 0.85rem; background: rgba(255, 255, 255, 0.12); padding: 0.35rem 0.75rem; border-radius: 999px; }
+.lona-project__result .lona-icon { width: 14px; height: 14px; color: var(--lona-gold); }
+@media (max-width: 900px) {
+	.lona-projects { grid-template-columns: 1fr 1fr; grid-auto-rows: 260px; }
+	.lona-project, .lona-project:nth-child(n) { grid-column: span 1 !important; grid-row: auto !important; }
+	.lona-project:nth-child(3n + 1) { grid-column: 1 / -1 !important; }
+	.lona-project__text { max-height: 8rem; opacity: 1; }
+}
+@media (max-width: 600px) {
+	.lona-projects { grid-template-columns: 1fr; grid-auto-rows: 300px; }
+	.lona-project:nth-child(n) { grid-column: 1 / -1 !important; }
+}
+
+/* ---------- Impact en chiffres ---------- */
+.lona-section--impact { overflow: hidden; }
+.lona-section--impact::before {
+	content: ""; position: absolute; right: -8%; top: 0; bottom: 0; width: 40%;
+	background: var(--lona-blue); transform: skewX(-12deg); opacity: 0.6;
+}
+.lona-section--impact > * { position: relative; }
+.lona-section--impact p { color: rgba(255, 255, 255, 0.82); }
+.lona-stats__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 0; }
+.lona-stats__list:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lona-stat { display: flex; flex-direction: column-reverse; padding: 1.5rem 1.6rem; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--lona-radius); }
+.lona-stat__value { margin: 0 0 0.25rem; font-family: var(--wp--preset--font-family--heading); font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; color: var(--lona-gold-light); letter-spacing: -0.03em; }
+.lona-stat__label { color: rgba(255, 255, 255, 0.85); font-weight: 600; }
+.lona-stats--light .lona-stat { background: #fff; border-color: var(--lona-line); }
+.lona-stats--light .lona-stat__value { color: var(--lona-navy); }
+.lona-stats--light .lona-stat__label { color: var(--lona-text); }
+.lona-stats__source { font-size: 0.8rem; opacity: 0.75; margin-top: 1rem; }
+@media (max-width: 600px) { .lona-stats__list, .lona-stats__list:has(> :nth-child(3):last-child) { grid-template-columns: 1fr 1fr; } .lona-stat { padding: 1.1rem; } }
+
+/* ---------- Témoignages ---------- */
+.lona-testimonials { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); align-items: start; }
+.lona-testimonials--n1 { grid-template-columns: minmax(0, 820px); justify-content: center; }
+.lona-testimonials--n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lona-testimonial { margin: 0; background: #fff; border-radius: var(--lona-radius); padding: clamp(1.5rem, 3vw, 2.25rem); position: relative; box-shadow: 0 18px 40px -30px rgba(12, 30, 59, 0.4); }
+.lona-testimonials:not(.lona-testimonials--n1) .lona-testimonial:nth-child(2) { margin-top: 2.5rem; background: var(--lona-navy); color: #fff; }
+.lona-testimonial > .lona-icon { width: 38px; height: 38px; color: var(--lona-gold); margin-bottom: 0.75rem; }
+.lona-testimonial__quote { margin: 0; border: 0; padding: 0; font-family: var(--wp--preset--font-family--editorial); font-size: 1.15rem; line-height: 1.6; font-style: italic; }
+.lona-testimonial__quote p { margin: 0 0 0.75rem; }
+.lona-testimonial__author { display: flex; align-items: center; gap: 0.85rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--lona-line); font-size: 0.9rem; }
+.lona-testimonial:nth-child(2) .lona-testimonial__author { border-color: rgba(255, 255, 255, 0.15); }
+.lona-testimonial__author > span { display: flex; flex-direction: column; }
+.lona-testimonial__photo { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--lona-gold); }
+.lona-testimonial__role { color: var(--lona-muted); }
+.lona-testimonial:nth-child(2) .lona-testimonial__role { color: rgba(255, 255, 255, 0.75); }
+.lona-testimonial__program { color: var(--lona-gold-dark); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; }
+.lona-testimonial:nth-child(2) .lona-testimonial__program { color: var(--lona-gold-light); }
+@media (max-width: 900px) { .lona-testimonials, .lona-testimonials--n2 { grid-template-columns: 1fr; } .lona-testimonial:nth-child(2) { margin-top: 0 !important; } }
+
+/* ---------- Partenaires ---------- */
+.lona-partners { list-style: none; padding: 0; margin: 2.5rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--lona-line); border: 1px solid var(--lona-line); border-radius: var(--lona-radius); overflow: hidden; }
+.lona-partner { background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.75rem 1.25rem; min-height: 130px; text-align: center; }
+.lona-partner img { max-height: 64px; width: auto; object-fit: contain; filter: grayscale(1); opacity: 0.75; transition: filter 0.35s, opacity 0.35s; }
+.lona-partner:hover img, .lona-partner a:focus img { filter: none; opacity: 1; }
+.lona-partner__wordmark { font-family: var(--wp--preset--font-family--heading); font-weight: 800; color: var(--lona-navy); }
+.lona-partner__name { font-weight: 700; color: var(--lona-navy); margin: 0.9rem 0 0.25rem; }
+.lona-partner__desc { font-size: 0.85rem; color: var(--lona-muted); margin: 0; }
+.lona-partners--named { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.lona-partners--compact { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); margin: 0; }
+.lona-partners--compact .lona-partner { min-height: 90px; padding: 1rem; }
+
+/* ---------- Galerie ---------- */
+.lona-gallery.wp-block-gallery { gap: clamp(0.5rem, 1vw, 0.9rem) !important; }
+.lona-gallery.wp-block-gallery.has-nested-images figure.wp-block-image { border-radius: var(--lona-radius-sm); overflow: hidden; }
+.lona-gallery.wp-block-gallery.has-nested-images figure.wp-block-image img { transition: transform 0.7s var(--lona-ease); }
+.lona-gallery.wp-block-gallery.has-nested-images figure.wp-block-image:hover img { transform: scale(1.04); }
+@media (min-width: 782px) {
+	/* rythme éditorial : grandes images en tête de série */
+	.lona-gallery.columns-4 figure.wp-block-image:nth-child(6n + 1) { flex-basis: calc(50% - 0.5rem) !important; width: calc(50% - 0.5rem) !important; }
+	.lona-gallery.columns-4 figure.wp-block-image:nth-child(6n + 4) { flex-basis: calc(50% - 0.5rem) !important; width: calc(50% - 0.5rem) !important; }
+}
+.lona-video { margin-top: 2rem; border-radius: var(--lona-radius); overflow: hidden; }
+
+/* Vidéos : chargement après consentement */
+.lona-embed-consent { position: relative; aspect-ratio: 16 / 9; background: var(--lona-navy) var(--lona-poster, none) center / cover; border-radius: var(--lona-radius); display: grid; place-items: center; text-align: center; color: #fff; padding: 1.5rem; }
+.lona-embed-consent iframe { display: none; }
+.lona-embed-consent.is-loaded { background: none; padding: 0; display: block; }
+.lona-embed-consent.is-loaded iframe { display: block; width: 100%; height: 100%; position: absolute; inset: 0; }
+.lona-embed-consent.is-loaded .lona-embed-consent__box { display: none; }
+.lona-embed-consent__box p { margin: 0.75rem auto 0; font-size: 0.85rem; max-width: 42ch; opacity: 0.85; }
+.lona-embed-consent__btn { background: var(--lona-gold); color: var(--lona-deep); border: 0; border-radius: 999px; padding: 0.85rem 1.5rem; font-weight: 800; cursor: pointer; font-family: var(--wp--preset--font-family--heading); }
+
+/* ---------- Appel à l'engagement ---------- */
+.lona-engage { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-radius: var(--lona-radius); overflow: hidden; box-shadow: var(--lona-shadow); }
+.lona-engage > * { margin: 0 !important; }
+.lona-engage__item { padding: clamp(1.75rem, 3.5vw, 3rem); background: #fff; position: relative; display: flex; flex-direction: column; }
+.lona-engage__item + .lona-engage__item { border-left: 1px solid var(--lona-line); }
+.lona-engage__item:nth-child(2) { background: var(--lona-navy); color: #fff; }
+.lona-engage__item:nth-child(2) h3 { color: #fff; }
+.lona-engage__item:nth-child(2) .wp-block-button.is-style-link-arrow .wp-block-button__link { color: #fff; }
+.lona-engage__item h3 { margin-top: 0.25rem; }
+.lona-engage__item .wp-block-buttons { margin-top: auto; padding-top: 1rem; }
+.lona-engage__num { display: inline-block; align-self: flex-start; font-family: var(--wp--preset--font-family--heading); font-weight: 800; font-size: 0.8rem; background: var(--lona-gold); color: var(--lona-deep); padding: 0.3rem 0.85rem; clip-path: var(--lona-skew); margin: 0 0 0.75rem; }
+@media (max-width: 860px) { .lona-engage { grid-template-columns: 1fr; } .lona-engage__item + .lona-engage__item { border-left: 0; border-top: 1px solid var(--lona-line); } }
+
+/* ---------- Événements ---------- */
+.lona-events { list-style: none; padding: 0; margin: 1.5rem 0 3rem; display: grid; gap: 0.75rem; }
+.lona-event { display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; padding: 1.25rem 1.5rem; border: 1px solid var(--lona-line); border-radius: var(--lona-radius); background: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
+.lona-event:hover { border-color: var(--lona-gold); box-shadow: var(--lona-shadow); }
+.lona-event__date { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 84px; height: 84px; background: var(--lona-navy); color: #fff; clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%); }
+.lona-event__day { font-family: var(--wp--preset--font-family--heading); font-size: 1.9rem; font-weight: 800; line-height: 1; color: var(--lona-gold-light); }
+.lona-event__month { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.lona-event__title { margin: 0 0 0.35rem; font-size: var(--wp--preset--font-size--large); }
+.lona-event__title a { color: var(--lona-navy); text-decoration: none; }
+.lona-event__title a::after { content: ""; position: absolute; inset: 0; }
+.lona-event { position: relative; }
+.lona-event__meta { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 0; color: var(--lona-muted); font-size: 0.9rem; }
+.lona-event__meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.lona-event__meta .lona-icon { width: 16px; height: 16px; color: var(--lona-gold-dark); }
+.lona-event__more { color: var(--lona-navy); }
+@media (max-width: 600px) { .lona-event { grid-template-columns: auto 1fr; gap: 1rem; padding: 1rem; } .lona-event__more { display: none; } .lona-event__date { width: 68px; height: 68px; } }
+
+/* ---------- Équipe ---------- */
+.lona-team { list-style: none; padding: 0; margin: 1.5rem 0 3rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: clamp(1.25rem, 2.5vw, 2rem); }
+.lona-member { position: relative; }
+.lona-member__photo { position: relative; isolation: isolate; margin-bottom: 1rem; }
+.lona-member__photo::before { content: ""; position: absolute; inset: 12% -6% -4% 10%; z-index: -1; background: var(--lona-light); clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); transition: background-color 0.4s; }
+.lona-member:hover .lona-member__photo::before { background: var(--lona-gold-light); }
+.lona-member__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--lona-radius-sm); }
+.lona-member__name { margin: 0; font-size: var(--wp--preset--font-size--large); }
+.lona-member__role { margin: 0.2rem 0 0.5rem; color: var(--lona-gold-dark); font-weight: 700; font-size: 0.88rem; }
+.lona-member__bio { font-size: 0.9rem; color: var(--lona-muted); }
+.lona-member__linkedin { color: var(--lona-blue); }
+
+/* ---------- Fiches (programmes, réalisations, événements) ---------- */
+.lona-single__cols { gap: clamp(2rem, 5vw, 4.5rem) !important; }
+.lona-single__aside > * + * { margin-top: 2rem; }
+.lona-details { display: flex; flex-direction: column; gap: 2rem; }
+.lona-details__facts { margin: 0; background: var(--lona-light); border-radius: var(--lona-radius); padding: 1.5rem; display: grid; gap: 1rem; border-top: 4px solid var(--lona-gold); }
+.lona-details__facts dt { display: flex; align-items: center; gap: 0.45rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; color: var(--lona-gold-dark); }
+.lona-details__facts dt .lona-icon { width: 16px; height: 16px; }
+.lona-details__facts dd { margin: 0.2rem 0 0; font-weight: 700; color: var(--lona-navy); }
+.lona-details__heading { font-size: var(--wp--preset--font-size--large) !important; margin: 0 0 1rem; }
+.lona-details__results { background: var(--lona-navy); color: #fff; padding: 1.5rem; border-radius: var(--lona-radius); }
+.lona-details__results .lona-details__heading { color: #fff; }
+.lona-details__video iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: var(--lona-radius-sm); }
+@media (min-width: 782px) { .lona-single__aside { position: sticky; top: calc(var(--lona-header-h) + 24px); align-self: flex-start; } }
+
+/* ---------- Article ---------- */
+.lona-article__head { padding-top: var(--wp--preset--spacing--60); }
+.lona-article__title { font-size: clamp(2rem, 4.6vw, 3.4rem) !important; line-height: 1.12 !important; }
+.lona-article__lead { font-size: var(--wp--preset--font-size--large); color: var(--lona-navy); }
+.lona-article__lead .wp-block-post-excerpt__more-text { display: none; }
+.lona-article__image img { border-radius: var(--lona-radius); width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+.lona-article__foot { border-top: 1px solid var(--lona-line); padding-block: 1.5rem 3rem; align-items: center; }
+.lona-tags a { display: inline-block; font-size: 0.82rem; padding: 0.3rem 0.8rem; background: var(--lona-light); border-radius: 999px; text-decoration: none; color: var(--lona-navy); margin: 0.15rem; }
+.lona-tags .wp-block-post-terms__separator { display: none; }
+.lona-content p, .lona-content li { max-width: 72ch; }
+.lona-content h2, .lona-content h3 { margin-top: 2.2em; }
+.lona-content .wp-block-image img { border-radius: var(--lona-radius-sm); }
+.lona-content blockquote:not(.lona-testimonial__quote) { margin-block: 2rem; }
+
+/* Partage */
+.lona-share { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
+.lona-share__label { margin: 0; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lona-muted); }
+.lona-share ul { display: flex; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
+.lona-share a, .lona-share button { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--lona-line); background: #fff; color: var(--lona-navy); cursor: pointer; transition: background-color 0.25s, color 0.25s, border-color 0.25s; }
+.lona-share a:hover, .lona-share button:hover { background: var(--lona-navy); color: #fff; border-color: var(--lona-navy); }
+.lona-share .lona-icon { width: 18px; height: 18px; }
+.lona-share button.is-copied { background: var(--lona-gold); border-color: var(--lona-gold); color: var(--lona-deep); }
+
+/* ---------- Formulaires ---------- */
+.lona-form { background: #fff; border: 1px solid var(--lona-line); border-radius: var(--lona-radius); padding: clamp(1.5rem, 3.5vw, 2.75rem); box-shadow: var(--lona-shadow); }
+.lona-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.15rem 1.25rem; }
+.lona-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.lona-field.is-wide { grid-column: 1 / -1; }
+.lona-field > label, .lona-field legend { font-weight: 700; font-size: 0.9rem; color: var(--lona-navy); }
+.lona-field__req { color: #b4232a; }
+.lona-field input[type="text"], .lona-field input[type="email"], .lona-field input[type="tel"], .lona-field select, .lona-field textarea {
+	width: 100%; font: inherit; font-size: 1rem; color: var(--lona-text); background: var(--lona-light);
+	border: 1.5px solid transparent; border-radius: var(--lona-radius-sm); padding: 0.85rem 1rem; min-height: 50px; transition: border-color 0.2s, background-color 0.2s;
+}
+.lona-field input:focus, .lona-field select:focus, .lona-field textarea:focus { outline: none; border-color: var(--lona-blue); background: #fff; box-shadow: 0 0 0 4px rgba(35, 64, 140, 0.12); }
+.lona-field input:user-invalid, .lona-field select:user-invalid, .lona-field textarea:user-invalid { border-color: #b4232a; }
+.lona-field fieldset { border: 0; padding: 0; margin: 0; }
+.lona-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.lona-chip { position: relative; cursor: pointer; }
+.lona-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.lona-chip span { display: inline-block; padding: 0.5rem 1rem; border-radius: 999px; border: 1.5px solid var(--lona-line); font-size: 0.9rem; font-weight: 600; transition: all 0.2s; }
+.lona-chip input:checked + span { background: var(--lona-navy); color: #fff; border-color: var(--lona-navy); }
+.lona-chip input:focus-visible + span { outline: 3px solid var(--lona-gold); outline-offset: 2px; }
+.lona-check { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.9rem; cursor: pointer; }
+.lona-check input { width: 20px; height: 20px; margin-top: 0.15rem; accent-color: var(--lona-navy); flex: none; }
+.lona-check a { display: inline-block; margin-left: 0.25rem; }
+.lona-form__footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; }
+.lona-form__hint { margin: 0; font-size: 0.82rem; color: var(--lona-muted); }
+.lona-form button.wp-block-button__link { border: 0; cursor: pointer; }
+.lona-form__notice { padding: 1rem 1.25rem; border-radius: var(--lona-radius-sm); margin-bottom: 1.5rem; font-weight: 600; }
+.lona-form__notice.is-success { background: #e8f5ee; color: #14532d; border-left: 4px solid #1f8a4c; }
+.lona-form__notice.is-error { background: #fdecec; color: #7f1d1d; border-left: 4px solid #b4232a; }
+.lona-form__hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+@media (max-width: 640px) { .lona-form__grid { grid-template-columns: 1fr; } .lona-form__footer .wp-block-button, .lona-form__footer .wp-block-button__link { width: 100%; } }
+
+/* Newsletter compacte (pied de page) */
+.lona-form--newsletter { background: transparent; border: 0; box-shadow: none; padding: 0; }
+.lona-form--newsletter .lona-form__grid { grid-template-columns: 1fr; gap: 0.75rem; }
+.lona-form--newsletter .lona-form__footer { margin-top: 0.85rem; }
+.lona-form--newsletter .lona-field > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.lona-form--newsletter .lona-check { font-size: 0.8rem; }
+
+.lona-form-page { gap: clamp(2rem, 5vw, 4rem) !important; }
+.lona-contact ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; font-style: normal; }
+.lona-contact li { display: flex; gap: 0.75rem; align-items: flex-start; }
+.lona-contact .lona-icon { flex: none; width: 20px; height: 20px; color: var(--lona-gold-dark); margin-top: 0.2rem; }
+.lona-contact a { color: inherit; }
+address.lona-contact { font-style: normal; }
+
+/* Réseaux sociaux */
+.lona-social { display: flex; gap: 0.5rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
+.lona-social a { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: inherit; transition: background-color 0.25s, color 0.25s; }
+.lona-social a:hover { background: var(--lona-gold); color: var(--lona-deep); }
+.lona-social .lona-icon { width: 18px; height: 18px; }
+.lona-content .lona-social a, .lona-form-page .lona-social a { background: var(--lona-light); color: var(--lona-navy); }
+
+/* Dons */
+.lona-donate__secure { font-size: 0.82rem; color: var(--lona-muted); margin-top: 0.75rem; }
+.lona-donate__info { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--lona-line); }
+
+.lona-inline-cta { align-items: center; margin-top: 2.5rem; }
+.lona-inline-cta h3 { margin: 0; }
+.lona-values > .wp-block-column { border-top: 3px solid var(--lona-gold) !important; }
+.lona-vision__card { border-top: 4px solid var(--lona-gold) !important; }
+
+/* Recherche */
+.lona-search .wp-block-search__inside-wrapper { border: 0; background: #fff; border-radius: 999px; padding: 0.3rem; box-shadow: var(--lona-shadow); }
+.lona-search input { border: 0 !important; background: transparent; padding-inline: 1.1rem !important; font: inherit; }
+.lona-search .wp-block-search__button { border-radius: 999px; margin: 0; }
+.lona-404 { padding-block: var(--wp--preset--spacing--70); }
+.lona-404 .lona-search { margin-block: 2rem; }
+
+/* ---------- Pied de page ---------- */
+.site-footer { background: var(--lona-deep); color: rgba(255, 255, 255, 0.8); position: relative; overflow: hidden; }
+.site-footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--lona-gold) 0 30%, var(--lona-blue) 30% 100%); }
+.site-footer a { color: rgba(255, 255, 255, 0.82); text-decoration: none; }
+.site-footer a:hover { color: var(--lona-gold-light); }
+.site-footer__main { padding-block: clamp(3.5rem, 7vw, 5.5rem) 2.5rem; }
+.site-footer__cols { gap: clamp(2rem, 4vw, 3.5rem) !important; }
+.site-footer .wp-block-site-logo a { display: inline-block; background: #fff; padding: 12px 16px; border-radius: 14px; }
+.site-footer .wp-block-site-logo:has(.lona-logo-light) a { background: none; padding: 0; }
+.site-footer .wp-block-site-logo:has(.lona-logo-light) img:not(.lona-logo-light) { display: none; }
+.site-footer .wp-block-site-logo .lona-logo-light { opacity: 1; }
+.site-footer .wp-block-site-logo a { display: inline-grid; }
+.site-footer__signature { font-family: var(--wp--preset--font-family--editorial); font-style: italic; font-size: 1.25rem; color: var(--lona-gold-light); margin-top: 1.25rem; }
+.site-footer__about { font-size: 0.92rem; }
+.site-footer__title { color: #fff !important; font-size: 0.8rem !important; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 1.25rem; }
+.site-footer__title:not(:first-child) { margin-top: 2rem; }
+.site-footer__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; font-size: 0.95rem; }
+.site-footer .lona-contact { font-size: 0.92rem; }
+.site-footer .lona-contact .lona-icon { color: var(--lona-gold); }
+.site-footer .lona-field input { background: rgba(255, 255, 255, 0.08); color: #fff; border-color: rgba(255, 255, 255, 0.15); }
+.site-footer .lona-field input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.site-footer .lona-check { color: rgba(255, 255, 255, 0.7); }
+.site-footer .lona-check a { color: var(--lona-gold-light); }
+.site-footer .lona-form__notice.is-success { background: rgba(31, 138, 76, 0.18); color: #c7f0d6; }
+.site-footer .lona-form__notice.is-error { background: rgba(180, 35, 42, 0.2); color: #ffd4d4; }
+.site-footer .lona-form .wp-block-button__link { background: var(--lona-gold); color: var(--lona-deep); }
+.site-footer .lona-editor-notice { background: rgba(255, 255, 255, 0.06); color: var(--lona-gold-light); }
+.site-footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-block: 1.5rem; font-size: 0.85rem; }
+.site-footer__bottom-inner { gap: 0.75rem 2rem; }
+.site-footer__bottom p { margin: 0; }
+.site-footer__legal { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+@media (max-width: 781px) { .site-footer__cols { flex-wrap: wrap !important; } .site-footer__cols > .wp-block-column { flex-basis: 100% !important; } }
+@media (min-width: 600px) and (max-width: 1000px) {
+	.site-footer__cols { flex-wrap: wrap !important; }
+	.site-footer__cols > .wp-block-column { flex-basis: calc(50% - 2rem) !important; flex-grow: 0 !important; }
+}
+
+/* ---------- Bandeau cookies ---------- */
+.lona-cookies {
+	position: fixed; z-index: 9999; left: 1rem; right: 1rem; bottom: 1rem; max-width: 560px;
+	background: #fff; color: var(--lona-text); border-radius: var(--lona-radius); box-shadow: 0 30px 60px -20px rgba(12, 30, 59, 0.45);
+	padding: 1.35rem 1.5rem; border-top: 4px solid var(--lona-gold); animation: lona-up 0.5s var(--lona-ease) both;
+}
+.lona-cookies p { margin: 0 0 1rem; font-size: 0.9rem; }
+.lona-cookies__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.lona-cookies button { font: inherit; font-weight: 800; border-radius: 999px; padding: 0.7rem 1.3rem; cursor: pointer; border: 2px solid var(--lona-navy); }
+.lona-cookies .is-accept { background: var(--lona-navy); color: #fff; }
+.lona-cookies .is-refuse { background: #fff; color: var(--lona-navy); }
+.lona-cookies a { font-size: 0.85rem; margin-left: auto; }
+
+/* ---------- Apparitions discrètes ---------- */
+.lona-js .reveal { opacity: 0; transform: translateY(22px); transition: opacity 1.3s var(--lona-ease), transform 1.3s var(--lona-ease); }
+.lona-js .reveal.is-visible { opacity: 1; transform: none; }
+.lona-js .lona-hero__content > * { animation: lona-up 0.9s var(--lona-ease) both; }
+.lona-js .lona-hero__content > *:nth-child(2) { animation-delay: 0.12s; }
+.lona-js .lona-hero__content > *:nth-child(3) { animation-delay: 0.24s; }
+.lona-js .lona-hero__content > *:nth-child(4) { animation-delay: 0.36s; }
+@keyframes lona-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes lona-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes lona-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(8deg); } }
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+	.lona-js .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Impression ---------- */
+@media print {
+	.site-header, .site-footer, .lona-share, .lona-cookies, .lona-form { display: none !important; }
+	.lona-page-hero, .lona-single-hero { background: none !important; color: #000 !important; }
+}
+
+/* Conteneur responsive natif neutralisé quand la vidéo attend le consentement */
+.wp-block-embed__wrapper:has(> .lona-embed-consent)::before { display: none; }
+
+/* Menu : une seule ligne sur grand écran, hamburger sous 1080 px (tablettes, petits portables) */
+.site-nav .wp-block-navigation__container { flex-wrap: nowrap; }
+.site-nav .wp-block-navigation-item__content { white-space: nowrap; }
+@media (min-width: 600px) and (max-width: 1080px) {
+	.site-nav .wp-block-navigation__responsive-container-open:not(.always-shown) { display: flex; }
+	.site-nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) { display: none; }
+}
+@media (max-width: 1080px) { .site-actions { margin-left: auto; } .site-nav { flex: 0 0 auto; order: 3; } }
+.lona-hero { min-height: min(92vh, 980px) !important; }
+
+/* Bandeaux : titres alignés sur le fil d'Ariane (même largeur que les autres blocs de la mise en page « contrainte ») */
+.lona-page-hero__title, .lona-page-hero h1, .lona-single-hero__title,
+.lona-page-hero__lead, .lona-single-hero__lead { max-width: var(--wp--style--global--content-size, 1240px) !important; text-wrap: balance; overflow-wrap: normal; hyphens: manual; }
+.lona-page-hero__lead p, .lona-single-hero__lead p { max-width: 62ch; }
+
+/* Mission officielle et mention de source */
+.lona-mission { margin-block: 1.75rem; }
+.lona-mission p { font-size: 1.2rem; color: var(--lona-navy); }
+.lona-mission cite { font-family: var(--wp--preset--font-family--body); font-style: normal; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lona-gold-dark); }
+.lona-source { font-size: 0.85rem !important; color: var(--lona-muted); border-top: 1px solid var(--lona-line); padding-top: 1rem; margin-top: 2rem !important; }
+
+.lona-single-hero { min-height: min(64vh, 640px) !important; }
+
+/* Visuel officiel FOCUS CANCER : on privilégie le haut de l'image (visages) plutôt que le texte */
+.lona-domain--sante .lona-domain__image img { object-position: center 15%; }
+.lona-hero .wp-block-cover__image-background { filter: saturate(1.05); }
+
+/* Fil d'Ariane aligné sur la grille du bandeau (1240 px) */
+.lona-page-hero > .lona-breadcrumbs, .lona-page-hero > .is-style-eyebrow { width: 100%; max-width: var(--wp--style--global--content-size, 1240px) !important; margin-left: auto !important; margin-right: auto !important; }
+
+/* Mosaïque des réalisations : pas de trou quel que soit le nombre de cartes */
+@media (min-width: 901px) {
+	.lona-projects--n7 .lona-project:last-child, .lona-projects--n12 .lona-project:last-child, .lona-projects--n17 .lona-project:last-child { grid-row: span 2; }
+	.lona-projects--n6 .lona-project:last-child, .lona-projects--n11 .lona-project:last-child, .lona-projects--n16 .lona-project:last-child { grid-column: 1 / -1; grid-row: auto; }
+}
+
+/* ---------- En-tête mobile ----------
+   - Le bouton menu ne peut jamais être poussé hors de l'écran.
+   - Sous 600 px, « Nous soutenir » passe dans le menu ouvert (bouton doré).
+   - Le flou d'arrière-plan est retiré quand le menu est ouvert : sinon il
+     confine le menu plein écran (position: fixed) à la hauteur de l'en-tête. */
+.site-brand { min-width: 0; flex-shrink: 1; }
+.site-brand .wp-block-site-logo, .site-brand .wp-block-site-logo a { min-width: 0; }
+.site-nav { flex-shrink: 0; }
+.site-nav .wp-block-navigation__responsive-container-open { flex-shrink: 0; padding: 6px; margin-right: -6px; }
+.site-header:has(.wp-block-navigation__responsive-container.is-menu-open) { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #fff; }
+.site-nav .lona-nav-cta { display: none !important; }
+.wp-block-navigation__responsive-container.is-menu-open .lona-nav-cta { display: block !important; order: -1; margin: 0 0 1rem; }
+.wp-block-navigation__responsive-container.is-menu-open .lona-nav-cta > .wp-block-navigation-item__content {
+	display: inline-flex !important; justify-content: center; width: 100%; padding: 0.95rem 1.5rem !important;
+	background: var(--lona-gold); color: var(--lona-deep) !important; border-radius: 999px; font-size: 1.05rem !important;
+}
+@media (max-width: 599px) {
+	.site-actions__cta { display: none !important; }
+	.site-header__inner { gap: 0.75rem; }
+	.site-brand .wp-block-site-logo img { max-height: 42px; }
+}
+@media (min-width: 600px) {
+	.wp-block-navigation__responsive-container.is-menu-open .lona-nav-cta { display: none !important; }
+}
+
+/* ==========================================================================
+   En-tête « méga-menu » (bloc lona/site-header)
+   Barre utilitaire sombre + barre principale blanche + panneaux à colonnes
+   avec descriptions et carte d'appel à l'action ; menu mobile en accordéon.
+   ========================================================================== */
+:root { --lona-topbar-h: 38px; --lona-mainbar-h: 78px; }
+.site-header {
+	position: sticky !important; top: calc(var(--wp-admin--admin-bar--height, 0px) - var(--lona-topbar-h)) !important;
+	z-index: 100; background: #fff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+	border: 0 !important; box-shadow: none;
+}
+.site-header.is-scrolled .lona-mainbar { box-shadow: 0 12px 30px -24px rgba(12, 30, 59, 0.5); }
+.lona-header { position: relative; }
+
+/* Barre utilitaire */
+.lona-topbar { background: var(--lona-deep); color: rgba(255, 255, 255, 0.78); font-size: 0.78rem; height: var(--lona-topbar-h); }
+.lona-topbar__inner { max-width: 1320px; height: 100%; margin-inline: auto; padding-inline: clamp(1rem, 3vw, 2rem); display: flex; align-items: center; gap: 1.5rem; }
+.lona-topbar__tagline { margin: 0 auto 0 0; font-family: var(--wp--preset--font-family--editorial); font-style: italic; color: var(--lona-gold-light); font-size: 0.85rem; }
+.lona-topbar__links { display: flex; align-items: center; gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+.lona-topbar__links a { color: inherit; text-decoration: none; font-weight: 500; }
+.lona-topbar__links a:hover, .lona-topbar__links a:focus-visible { color: #fff; }
+.lona-topbar__social .lona-icon { width: 15px; height: 15px; display: block; }
+.lona-topbar__lang { padding-left: 1.25rem; border-left: 1px solid rgba(255, 255, 255, 0.15); }
+.lona-topbar__lang .lona-lang, .lona-topbar__lang a { color: #fff; }
+
+/* Barre principale */
+.lona-mainbar { position: relative; background: #fff; border-bottom: 1px solid var(--lona-line); transition: box-shadow 0.3s; }
+.lona-mainbar__inner { max-width: 1320px; height: var(--lona-mainbar-h); margin-inline: auto; padding-inline: clamp(1rem, 3vw, 2rem); display: flex; align-items: center; gap: 1.25rem; }
+.lona-mainbar__brand { flex: none; display: flex; align-items: center; }
+.lona-mainbar__brand .wp-block-site-logo img { max-height: 54px; width: auto; }
+.lona-mainbar__brand .wp-block-site-logo a { display: inline-grid; background: none !important; padding: 0 !important; box-shadow: none !important; }
+.lona-mainbar__brand .lona-logo-light { display: none; }
+
+/* Rubriques */
+.lona-mega { flex: 1; display: flex; justify-content: center; }
+.lona-mega__list { display: flex; align-items: center; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
+.lona-mega__trigger {
+	display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.55rem 0.8rem; border: 0; border-radius: 10px; background: none; cursor: pointer;
+	font-family: var(--wp--preset--font-family--heading); font-size: 0.93rem; font-weight: 700; color: var(--lona-navy); text-decoration: none; white-space: nowrap;
+	transition: background-color 0.2s, color 0.2s;
+}
+.lona-mega__trigger:hover, .lona-mega__trigger[aria-expanded="true"], .lona-mega__trigger[aria-current="page"] { background: var(--lona-light); color: var(--lona-blue); }
+.lona-mega__badge { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; flex: none; }
+.lona-mega__badge .lona-icon { width: 14px; height: 14px; }
+.lona-mega__badge--0, .lona-mega__badge--2 { background: var(--lona-navy); color: var(--lona-gold-light); }
+.lona-mega__badge--1, .lona-mega__badge--3 { background: var(--lona-gold); color: var(--lona-deep); }
+.lona-mega__chevron { transition: transform 0.25s var(--lona-ease); opacity: 0.7; }
+.lona-mega__trigger[aria-expanded="true"] .lona-mega__chevron { transform: rotate(180deg); }
+
+/* Panneau du méga-menu */
+.lona-mega__panel {
+	position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-top: 1px solid var(--lona-line);
+	box-shadow: 0 30px 50px -30px rgba(12, 30, 59, 0.45); padding: 2rem 0 2.25rem; animation: lona-panel 0.22s var(--lona-ease) both;
+}
+.lona-mega__panel[hidden] { display: none; }
+@keyframes lona-panel { from { transform: translateY(-6px); } to { transform: none; } }
+.lona-mega__panel-inner { max-width: 1240px; margin-inline: auto; padding-inline: clamp(1rem, 3vw, 2rem); display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 2.5rem; align-items: start; }
+.lona-mega__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem 2rem; }
+.lona-mega__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+.lona-mega__col-title { margin: 0 0 0.6rem 0.75rem; font-family: var(--wp--preset--font-family--heading); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lona-gold-dark); }
+.lona-mega__col a { display: block; padding: 0.6rem 0.75rem; border-radius: 10px; text-decoration: none; transition: background-color 0.2s; }
+.lona-mega__col a strong { display: block; color: var(--lona-navy); font-family: var(--wp--preset--font-family--heading); font-size: 0.95rem; }
+.lona-mega__col a span { display: block; color: var(--lona-muted); font-size: 0.8rem; line-height: 1.45; margin-top: 0.15rem; }
+.lona-mega__col a:hover, .lona-mega__col a:focus-visible, .lona-mega__col a[aria-current="page"] { background: var(--lona-light); }
+.lona-mega__col a:hover strong, .lona-mega__col a[aria-current="page"] strong { color: var(--lona-blue); }
+.lona-mega__promo { position: relative; overflow: hidden; background: var(--lona-navy); color: rgba(255, 255, 255, 0.85); border-radius: 16px; padding: 1.6rem 1.6rem 1.75rem; }
+.lona-mega__promo::after { content: ""; position: absolute; right: -10px; top: -10px; width: 90px; height: 90px; background: var(--lona-star) center / contain no-repeat; opacity: 0.35; }
+.lona-mega__promo-title { margin: 0 0 0.5rem; font-family: var(--wp--preset--font-family--heading); font-size: 1.15rem; font-weight: 800; color: #fff; max-width: 15ch; }
+.lona-mega__promo p { font-size: 0.88rem; line-height: 1.55; margin: 0 0 1.1rem; }
+.lona-mega__promo-btn { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--lona-gold); color: var(--lona-deep); border-radius: 8px; padding: 0.6rem 1rem; font-family: var(--wp--preset--font-family--heading); font-size: 0.8rem; font-weight: 800; text-decoration: none; }
+.lona-mega__promo-btn .lona-icon { width: 15px; height: 15px; }
+.lona-mega__promo-btn:hover { background: var(--lona-gold-light); }
+
+/* Actions */
+.lona-mainbar__actions { display: flex; align-items: center; gap: 1.1rem; flex: none; }
+.lona-mainbar__link { color: var(--lona-navy); font-family: var(--wp--preset--font-family--heading); font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+.lona-mainbar__link:hover { color: var(--lona-blue); text-decoration: underline; text-underline-offset: 4px; }
+.lona-btn-cta, .lona-btn-outline {
+	display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; padding: 0.75rem 1.2rem;
+	font-family: var(--wp--preset--font-family--heading); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; white-space: nowrap;
+	transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+.lona-btn-cta { background: var(--lona-gold); color: var(--lona-deep); }
+.lona-btn-cta:hover { background: var(--lona-gold-light); transform: translateY(-1px); }
+.lona-btn-outline { border: 1.5px solid var(--lona-line); color: var(--lona-navy); background: #fff; }
+.lona-btn-outline:hover { border-color: var(--lona-navy); }
+
+/* Bouton menu mobile */
+.lona-burger { display: none; margin-left: auto; width: 46px; height: 46px; border: 1.5px solid var(--lona-line); border-radius: 12px; background: #fff; cursor: pointer; place-items: center; flex: none; }
+.lona-burger__lines { display: grid; gap: 6px; justify-items: end; }
+.lona-burger__lines span { display: block; height: 2.5px; border-radius: 2px; background: var(--lona-navy); transition: transform 0.25s var(--lona-ease), width 0.25s; }
+.lona-burger__lines span:first-child { width: 20px; }
+.lona-burger__lines span:last-child { width: 13px; background: var(--lona-gold); }
+.lona-burger[aria-expanded="true"] .lona-burger__lines span:first-child { transform: translateY(4.25px) rotate(45deg); width: 20px; }
+.lona-burger[aria-expanded="true"] .lona-burger__lines span:last-child { transform: translateY(-4.25px) rotate(-45deg); width: 20px; background: var(--lona-navy); }
+
+/* Menu mobile */
+.lona-mobile { position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-top: 1px solid var(--lona-line); box-shadow: 0 30px 40px -30px rgba(12, 30, 59, 0.5); max-height: calc(100dvh - var(--lona-mainbar-h) - var(--wp-admin--admin-bar--height, 0px)); overflow-y: auto; overscroll-behavior: contain; padding: 0.25rem clamp(1rem, 4vw, 2rem) 1.5rem; animation: lona-panel 0.22s var(--lona-ease) both; }
+.lona-mobile[hidden] { display: none; }
+.lona-mobile__list { list-style: none; margin: 0; padding: 0; }
+.lona-mobile__item { border-bottom: 1px solid var(--lona-line); }
+.lona-mobile__toggle, .lona-mobile__link { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1rem 0; border: 0; background: none; cursor: pointer; text-align: left; font-family: var(--wp--preset--font-family--heading); font-size: 1.02rem; font-weight: 700; color: var(--lona-navy); text-decoration: none; }
+.lona-mobile__toggle svg { transition: transform 0.25s var(--lona-ease); color: var(--lona-navy); }
+.lona-mobile__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.lona-mobile__toggle[aria-expanded="true"] { color: var(--lona-blue); }
+.lona-mobile__sub { padding: 0 0 1rem 0.25rem; }
+.lona-mobile__sub[hidden] { display: none; }
+.lona-mobile__sub .lona-mega__col-title { margin: 0.75rem 0 0.35rem; }
+.lona-mobile__sub ul { list-style: none; margin: 0; padding: 0; }
+.lona-mobile__sub a { display: block; padding: 0.55rem 0.75rem; border-left: 2px solid var(--lona-line); color: var(--lona-text); text-decoration: none; font-size: 0.95rem; }
+.lona-mobile__sub a:hover, .lona-mobile__sub a:focus-visible { border-left-color: var(--lona-gold); color: var(--lona-blue); }
+.lona-mobile__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.25rem; }
+.lona-mobile__actions a { padding: 0.95rem 0.5rem; }
+.lona-mobile__lang { display: flex; justify-content: center; margin-top: 1.25rem; }
+
+/* Points de rupture */
+@media (max-width: 1180px) {
+	.lona-mainbar__link { display: none; }
+	.lona-mega__trigger { padding: 0.55rem 0.6rem; }
+	.lona-mega__badge { display: none; }
+}
+@media (max-width: 1023px) {
+	.lona-mega { display: none; }
+	.lona-burger { display: grid; }
+	.lona-mainbar__actions { margin-left: auto; }
+	.lona-burger { margin-left: 0; }
+}
+@media (min-width: 1024px) { .lona-mobile { display: none !important; } }
+@media (max-width: 699px) {
+	:root { --lona-topbar-h: 0px; --lona-mainbar-h: 68px; }
+	.lona-topbar { display: none; }
+	.lona-mainbar__actions { display: none; }
+	.lona-burger { margin-left: auto; }
+	.lona-mainbar__brand .wp-block-site-logo img { max-height: 44px; }
+}
+
+/* L'en-tête n'est plus superposé au Hero */
+.lona-hero { padding-top: clamp(3rem, 7vw, 5rem) !important; }
+html { scroll-padding-top: calc(var(--lona-mainbar-h) + 16px); }
+
+/* ---------- La Présidente ---------- */
+.lona-section--president { overflow: hidden; }
+.lona-section--president::before { content: ""; position: absolute; left: -10%; top: 0; bottom: 0; width: 45%; background: var(--lona-navy); transform: skewX(-12deg); opacity: 0.7; }
+.lona-section--president > * { position: relative; }
+.lona-section--president p, .lona-section--president li { color: rgba(255, 255, 255, 0.86); }
+.lona-section--president .is-style-lead { color: #fff; }
+.lona-president__photo img { aspect-ratio: 4 / 5; object-position: 58% 30%; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6); }
+.lona-president__facts { margin-block: 1.5rem 2rem; }
+.lona-president__facts li { font-size: 0.95rem; }
+
+/* Frise chronologique */
+.lona-timeline { position: relative; display: grid; gap: 0; margin-block: 1.5rem 3rem; padding-left: 1.75rem; }
+.lona-timeline::before { content: ""; position: absolute; left: 6px; top: 0.5rem; bottom: 0.5rem; width: 2px; background: linear-gradient(var(--lona-gold), var(--lona-line)); }
+.lona-timeline__item { position: relative; padding: 0 0 1.75rem; margin: 0 !important; }
+.lona-timeline__item::before { content: ""; position: absolute; left: -1.75rem; top: 0.3rem; width: 14px; height: 14px; background: var(--lona-star) center / contain no-repeat; }
+.lona-timeline__date { margin: 0 0 0.25rem !important; font-family: var(--wp--preset--font-family--heading); font-weight: 800; color: var(--lona-gold-dark); letter-spacing: 0.04em; }
+.lona-timeline__text { margin: 0 !important; max-width: 70ch; }
+
+/* ==========================================================================
+   Animations (sobres, accessibles : désactivées si « réduire les animations »)
+   ========================================================================== */
+/* Apparition au défilement, en cascade */
+.lona-js .lona-anim { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity 1.4s var(--lona-ease), transform 1.4s var(--lona-ease); transition-delay: calc(var(--lona-i, 0) * 150ms); will-change: opacity, transform; }
+.lona-js .lona-anim--img { transform: scale(1.04); transition-duration: 1.9s; }
+.lona-js .lona-anim--left { transform: translate3d(-36px, 0, 0); }
+.lona-js .lona-anim--right { transform: translate3d(36px, 0, 0); }
+.lona-js .lona-anim.is-in { opacity: 1; transform: none; }
+
+/* Titre du Hero mot par mot */
+.lona-word { display: inline-block; white-space: pre; }
+.lona-js .lona-hero__title .lona-word { opacity: 0; transform: translate3d(0, 0.6em, 0) rotate(2deg); animation: lona-word 1.4s var(--lona-ease) forwards; animation-delay: calc(0.35s + var(--w) * 120ms); }
+@keyframes lona-word { to { opacity: 1; transform: none; } }
+.lona-js .lona-hero__content > *:not(.lona-hero__title) { animation-duration: 1.4s; animation-delay: 1.3s; }
+.lona-js .lona-hero__content > .lona-hero__lead { animation-delay: 1.6s; }
+.lona-js .lona-hero__content > .lona-hero__actions { animation-delay: 1.9s; }
+.lona-js .lona-hero__content > .lona-hero__title { animation: none; }
+
+/* Filet doré du Hero qui se dessine */
+.lona-js .lona-hero__content::before { transform-origin: top; animation: lona-draw 2.2s var(--lona-ease) 0.3s both; }
+@keyframes lona-draw { from { transform: skewX(-8deg) scaleY(0); } to { transform: skewX(-8deg) scaleY(1); } }
+
+/* Étoiles des surtitres qui pivotent à l'apparition */
+.lona-js .lona-anim .is-style-eyebrow::before, .lona-js .is-style-eyebrow.lona-anim::before { transition: transform 1.6s var(--lona-ease) 0.35s; transform: rotate(-90deg) scale(0.4); }
+.lona-js .lona-anim.is-in .is-style-eyebrow::before, .lona-js .is-style-eyebrow.lona-anim.is-in::before { transform: none; }
+
+/* Profondeur (parallaxe) sur les grandes photos */
+.lona-parallax { translate: 0 var(--lona-py, 0px); will-change: translate; }
+.lona-hero .wp-block-cover__image-background, .lona-build .wp-block-cover__image-background { inset: -8% 0 !important; height: 116% !important; }
+
+/* En-tête compact au défilement */
+.lona-mainbar__inner { transition: height 0.35s var(--lona-ease); }
+.lona-mainbar__brand .wp-block-site-logo img { transition: max-height 0.35s var(--lona-ease); }
+.site-header.is-compact .lona-mainbar__inner { height: 66px; }
+.site-header.is-compact .lona-mainbar__brand .wp-block-site-logo img { max-height: 44px; }
+
+/* Reflet sur les boutons dorés */
+.wp-block-button.is-style-gold .wp-block-button__link, .lona-btn-cta { position: relative; overflow: hidden; }
+.wp-block-button.is-style-gold .wp-block-button__link::after, .lona-btn-cta::after {
+	content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+	background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent); transform: skewX(-20deg);
+}
+.wp-block-button.is-style-gold .wp-block-button__link:hover::after, .lona-btn-cta:hover::after { animation: lona-shine 1.2s var(--lona-ease); }
+@keyframes lona-shine { to { left: 130%; } }
+
+/* Cartes : légère élévation au survol */
+.lona-domain, .lona-news__card .wp-block-post-featured-image, .lona-engage__item, .lona-member__photo { transition: transform 0.45s var(--lona-ease), box-shadow 0.45s var(--lona-ease); }
+.lona-domain:hover { transform: translateY(-6px); box-shadow: 0 28px 50px -28px rgba(12, 30, 59, 0.6); }
+.lona-engage__item:hover { transform: translateY(-4px); }
+.lona-partner img { transition: filter 0.4s, opacity 0.4s, transform 0.4s var(--lona-ease); }
+.lona-partner:hover img { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+	.lona-js .lona-anim, .lona-js .lona-hero__title .lona-word { opacity: 1 !important; transform: none !important; animation: none !important; }
+	.lona-parallax { translate: none !important; }
+}
+.lona-js .lona-domain.lona-anim.is-in:hover { transform: translateY(-6px); transition-delay: 0s; }
+.lona-js .lona-engage__item.lona-anim.is-in:hover { transform: translateY(-4px); transition-delay: 0s; }
+.lona-js .lona-anim.is-in { transition-delay: calc(var(--lona-i, 0) * 150ms), calc(var(--lona-i, 0) * 150ms); }
+
+/* Netteté : plus de calque d'animation une fois l'élément affiché (évite le texte flou, notamment sous Safari) */
+.lona-js .lona-anim.is-in, .lona-js .reveal.is-visible { will-change: auto; }
+.lona-parallax { will-change: auto; }
+
+/* Lisibilité renforcée : Présidente et chiffres d'impact */
+.lona-section--president h2 { color: #fff !important; font-size: clamp(2.2rem, 4.4vw, 3.4rem) !important; line-height: 1.1 !important; }
+.lona-section--impact h2 { color: #fff !important; }
+.lona-section--impact p { color: rgba(255, 255, 255, 0.92); }
+.lona-stat { background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.2); }
+.lona-stat__value { color: var(--lona-gold-light); text-shadow: none; -webkit-font-smoothing: antialiased; }
+.lona-stat__label { color: #fff; font-weight: 600; opacity: 0.95; }
+.lona-stats__source { color: rgba(255, 255, 255, 0.85); opacity: 1; }

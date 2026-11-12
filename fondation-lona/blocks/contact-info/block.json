@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/contact-info",
+	"title": "Coordonnées",
+	"category": "lona",
+	"icon": "location",
+	"description": "Coordonnées officielles (réglages).",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"layout": {
+			"type": "string",
+			"default": "list",
+			"enum": [
+				"list",
+				"footer"
+			]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

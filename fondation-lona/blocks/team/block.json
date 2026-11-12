@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/team",
+	"title": "Équipe et gouvernance",
+	"category": "lona",
+	"icon": "id",
+	"description": "Membres de l'équipe, filtrables par groupe.",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"group": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

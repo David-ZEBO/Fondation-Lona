@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/projects",
+	"title": "Réalisations",
+	"category": "lona",
+	"icon": "flag",
+	"description": "Réalisations en modules photographiques asymétriques.",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"count": {
+			"type": "number",
+			"default": 5
+		},
+		"domain": {
+			"type": "string",
+			"default": "",
+			"enum": [
+				"",
+				"education",
+				"sante",
+				"vbg",
+				"autonomisation",
+				"inclusion"
+			]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

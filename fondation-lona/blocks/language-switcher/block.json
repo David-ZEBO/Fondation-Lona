@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/language-switcher",
+	"title": "Sélecteur de langue",
+	"category": "lona",
+	"icon": "translation",
+	"description": "Sélecteur de langue (TranslatePress ou Polylang).",
+	"textdomain": "fondation-lona",
+	"attributes": {},
+	"supports": {
+		"html": false,
+		"align": false,
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/partners",
+	"title": "Partenaires",
+	"category": "lona",
+	"icon": "groups",
+	"description": "Logos des partenaires.",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"featuredOnly": {
+			"type": "boolean",
+			"default": false
+		},
+		"showNames": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}

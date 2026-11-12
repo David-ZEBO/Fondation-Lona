@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lona/impact-stats",
+	"title": "Impact en chiffres",
+	"category": "lona",
+	"icon": "chart-bar",
+	"description": "Indicateurs vérifiés saisis dans Fondation LONA > Réglages.",
+	"textdomain": "fondation-lona",
+	"attributes": {
+		"tone": {
+			"type": "string",
+			"default": "dark",
+			"enum": [
+				"dark",
+				"light"
+			]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "lona-blocks-editor",
+	"render": "file:./render.php"
+}
