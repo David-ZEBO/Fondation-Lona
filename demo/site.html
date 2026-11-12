@@ -38,12 +38,22 @@ try {
 	step('Installation du thème Fondation LONA…', 45);
 	const files = await (await fetch('manifest.json?' + Date.now())).json();
 	const base = '/wordpress/wp-content/themes/fondation-lona/';
-	let n = 0;
-	for (const f of files) {
-		await client.mkdir((base + f).split('/').slice(0, -1).join('/'));
-		await client.writeFile(base + f, new Uint8Array(await (await fetch('../fondation-lona/' + f + '?' + Date.now())).arrayBuffer()));
-		if (++n % 20 === 0) step('Installation du thème… (' + n + '/' + files.length + ' fichiers)', 45 + Math.round(25 * n / files.length));
+	// Dossiers d'abord, puis téléchargement en parallèle (12 à la fois) : bien plus rapide sur mobile.
+	for (const dir of [...new Set(files.map(f => (base + f).split('/').slice(0, -1).join('/')))]) {
+		await client.mkdir(dir);
 	}
+	let n = 0;
+	const queue = files.slice();
+	const worker = async () => {
+		while (queue.length) {
+			const f = queue.shift();
+			const data = new Uint8Array(await (await fetch('../fondation-lona/' + f)).arrayBuffer());
+			await client.writeFile(base + f, data);
+			n++;
+			step('Installation du thème… (' + n + '/' + files.length + ' fichiers)', 45 + Math.round(25 * n / files.length));
+		}
+	};
+	await Promise.all(Array.from({ length: 12 }, worker));
 	step('Activation du thème…', 72);
 	await client.run({ code: `<?php require '/wordpress/wp-load.php'; switch_theme('fondation-lona'); update_option('blogname','Fondation LONA'); update_option('blogdescription', "Ensemble, semons l'excellence."); wp_delete_post(1, true); wp_delete_post(2, true);` });
 	step('Création des pages, programmes, réalisations et articles…', 85);
